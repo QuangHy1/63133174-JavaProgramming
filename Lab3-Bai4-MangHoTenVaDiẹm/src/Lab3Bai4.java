@@ -1,9 +1,81 @@
+import java.util.Scanner;
 
 public class Lab3Bai4 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	private String hoten;
+	private double diem;
+	
+	public String getHoten() {
+		return hoten;
 	}
+
+	public void setHoten(String hoten) {
+		this.hoten = hoten;
+	}
+
+	public double getDiem() {
+		return diem;
+	}
+
+	public void setDiem(double diem) {
+		this.diem = diem;
+	}
+
+	public void Nhap() {
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("\tHọ và tên: ");
+		hoten = scan.next();
+		System.out.print("\tĐiểm: ");
+		diem = scan.nextDouble();
+	}
+	
+	public void Xuat() {
+			if(diem<5) {
+				System.out.printf("%s\t%f\tYếu", hoten, diem);
+			}
+			else if(diem>=5 && diem<6.5) {
+				System.out.printf("%s\t%f\tTrung bình", hoten, diem);
+			}
+			else if(diem>=6.5 && diem<7.5) {
+				System.out.printf("%s\t%f\tKhá", hoten, diem);
+			}
+			else if(diem>=7.5 && diem<9) {
+				System.out.printf("%s\t%f\tGiỏi", hoten, diem);
+			}
+			else {
+				System.out.printf("%s\t%f\tXuất sắc", hoten, diem);
+			}
+	}
+
+	public static void main(String[] args) {
+		int n;
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Nhập số lượng sinh viên muốn thêm: ");
+		n = scan.nextInt();
+		Lab3Bai4[] SVList = new Lab3Bai4[n];
+		for(int i=0; i<n; i++) {
+			SVList[i] = new Lab3Bai4();
+			System.out.printf("Sinh viên thứ %d: \n", i+1);
+			SVList[i].Nhap();
+		}
+		
+		System.out.println("\nThông tin sinhh viên vừa nhập:");
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				if(SVList[i].getDiem() > SVList[j].getDiem()) {
+					Lab3Bai4 t = SVList[i];
+					SVList[i] = SVList[j];
+					SVList[j] = t;
+				}
+			}
+		}
+		for(int i=0; i<n; i++) {
+			SVList[i].Xuat();
+			System.out.println();
+		}
+		scan.close();
+	}
+
 
 }
